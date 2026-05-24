@@ -1009,7 +1009,7 @@
           </div>
           <div class="eb-row">
             <div class="eb-label">Mid-Month Payday</div>
-            <div class="eb-track"><div class="eb-bar" style="width:78%; background:#bf4e30;"></div></div>
+            <div class="eb-track"><div class="eb-bar" style="width:78%; background:#d67a10;"></div></div>
             <div class="eb-pct" style="color:#bf4e30;">+39%</div>
           </div>
           <div class="eb-row">
@@ -1281,7 +1281,7 @@
   function openPdfModal(e, path) {
     e.preventDefault();
     document.getElementById('modalTitle').textContent = "Undergraduate Research Paper";
-    document.getElementById('courseFrame').src = path;
+    document.getElementById('courseFrame').src = path + "#toolbar=0&navpanes=0";
     document.getElementById('modal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
