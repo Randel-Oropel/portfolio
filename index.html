@@ -160,7 +160,7 @@
       100% { transform: scale(1.1); opacity: 0.4; }
     }
 
-    .hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; }
+    .hero-inner { position: relative; z-index: 1; }
     
     .hero-eyebrow {
       display: flex; align-items: center; gap: .6rem;
@@ -180,7 +180,7 @@
 
     h1 {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: 0.02em;
@@ -626,8 +626,208 @@
     /* Bottom charts row */
     .thesis-bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 
+    /* ─── HERO TWO-COLUMN LAYOUT ─────────────────────────────── */
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 1rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* ─── CERTIFICATION CAROUSEL ─────────────────────────────── */
+    .cert-carousel-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .cert-carousel-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--deep-ocean);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cert-carousel-label::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--tea-green);
+      animation: blink 1s infinite;
+    }
+    .cert-carousel-track {
+      position: relative;
+      width: 100%;
+      /* Height set by JS based on tallest slide */
+      min-height: 220px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-glow);
+    }
+    /* HUD corner brackets */
+    .cert-carousel-track::before {
+      content: '';
+      position: absolute; top: -1px; left: -1px;
+      width: 16px; height: 16px;
+      border-top: 2px solid var(--deep-ocean);
+      border-left: 2px solid var(--deep-ocean);
+      z-index: 4;
+    }
+    .cert-carousel-track::after {
+      content: '';
+      position: absolute; bottom: -1px; right: -1px;
+      width: 16px; height: 16px;
+      border-bottom: 2px solid var(--rosy-copper);
+      border-right: 2px solid var(--rosy-copper);
+      z-index: 4;
+    }
+    .cert-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+    .cert-slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .cert-slide img {
+      max-width: 100%;
+      max-height: 160px;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      filter: drop-shadow(0 4px 10px rgba(11,122,117,0.15));
+    }
+    .cert-slide-name {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+      margin-top: 0.75rem;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .cert-slide-issuer {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      text-align: center;
+    }
+    /* Dot indicators */
+    .cert-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .cert-dot {
+      width: 6px; height: 6px;
+      border-radius: 1px;
+      background: var(--border-light);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .cert-dot.active {
+      background: var(--deep-ocean);
+      border-color: var(--deep-ocean);
+      width: 18px;
+    }
+    /* Counter badge */
+    .cert-counter {
+      position: absolute;
+      top: 0.6rem; right: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--deep-ocean);
+      background: rgba(11,122,117,0.08);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(11,122,117,0.2);
+      z-index: 3;
+    }
+
+    /* ─── COURSES SUBHEADINGS ────────────────────────────────── */
+    .courses-section-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      margin-top: 3rem;
+    }
+    .courses-section-title:first-child { margin-top: 0; }
+    .courses-sub-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid;
+    }
+    .badge-rise {
+      background: rgba(11,122,117,0.08);
+      color: var(--deep-ocean);
+      border-color: var(--deep-ocean);
+    }
+    .badge-storyline {
+      background: rgba(191,78,48,0.08);
+      color: var(--rosy-copper);
+      border-color: var(--rosy-copper);
+    }
+    .courses-sub-line {
+      flex: 1;
+      height: 5px;
+      background: var(--deep-ocean);
+    }
+    .courses-sub-label {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-main);
+    }
+    .courses-sub-count {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border-light);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+    }
+
     /* Responsive Adjustments */
     @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .cert-carousel-col { order: -1; }
+
       .about-grid { grid-template-columns: 1fr; }
       .about-stats { grid-template-columns: 1fr 1fr; }
       .edu-grid { grid-template-columns: 1fr; } 
@@ -685,33 +885,46 @@
   <div class="hero-shape s2"></div>
   <div class="hero-shape s3"></div>
   <div class="container hero-inner">
-    <div class="hero-eyebrow fade-in">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-        <polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line>
-      </svg>
-      Instructional Designer
+    <!-- LEFT COLUMN: existing hero content -->
+    <div class="hero-left">
+      <div class="hero-eyebrow fade-in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+          <polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line>
+        </svg>
+        Instructional Designer
+      </div>
+      <h1 class="fade-in delay-1">Randel <em>Oropel</em></h1>
+      <p class="hero-sub fade-in delay-2">Merging applied statistics with evidence-based instructional design to create clean, meaningful learning experiences.</p>
+      <div class="hero-contact fade-in delay-3">
+        <span class="contact-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Guiguinto, Bulacan
+        </span>
+        <a href="tel:+639614690702" class="contact-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          +63 961 469 0702
+        </a>
+        <a href="mailto:randeloropel@gmail.com" class="contact-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 4h16v16H4z"/><path d="M4 4l8 8 8-8"/></svg>
+          randeloropel@gmail.com
+        </a>
+      </div>
+      <div class="cta-row fade-in delay-4">
+        <a href="#courses" class="btn btn-primary">
+          View Portfolio
+        </a>
+        <a href="#about" class="btn btn-outline">About Me</a>
+      </div>
     </div>
-    <h1 class="fade-in delay-1">Randel <br><em>Oropel</em></h1>
-    <p class="hero-sub fade-in delay-2">Merging applied statistics with evidence-based instructional design to create clean, meaningful learning experiences.</p>
-    <div class="hero-contact fade-in delay-3">
-      <span class="contact-pill">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-        Guiguinto, Bulacan
-      </span>
-      <a href="tel:+639614690702" class="contact-pill">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        +63 961 469 0702
-      </a>
-      <a href="mailto:randeloropel@gmail.com" class="contact-pill">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 4h16v16H4z"/><path d="M4 4l8 8 8-8"/></svg>
-        randeloropel@gmail.com
-      </a>
-    </div>
-    <div class="cta-row fade-in delay-4">
-      <a href="#courses" class="btn btn-primary">
-        View Portfolio
-      </a>
-      <a href="#about" class="btn btn-outline">About Me</a>
+
+    <!-- RIGHT COLUMN: certification carousel -->
+    <div class="cert-carousel-col fade-in delay-3">
+      <div class="cert-carousel-label">Certifications</div>
+      <div class="cert-carousel-track" id="certTrack">
+        <span class="cert-counter" id="certCounter">1 / 1</span>
+        <!-- Slides injected by JS -->
+      </div>
+      <div class="cert-dots" id="certDots"></div>
     </div>
   </div>
   <div class="scroll-hint">
@@ -742,8 +955,8 @@
           <span class="desc">Research Roles</span>
         </div>
         <div class="stat-card">
-          <span class="num">360</span>
-          <span class="desc">Rise Certified</span>
+          <span class="num">Articulate</span>
+          <span class="desc">Rise360 and Storyline</span>
         </div>
         <div class="stat-card">
           <span class="num">2024</span>
@@ -842,7 +1055,7 @@
       
       <div class="edu-card college-card">
         <div class="edu-main">
-          <span class="edu-years">2022 - EXP. 2026</span>
+          <span class="edu-years">2022 - 2026</span>
           <div class="edu-degree">BS Mathematics - Applied Statistics</div>
           <div class="edu-school">Bulacan State University, Malolos Campus</div>
         </div>
@@ -898,7 +1111,25 @@
       <span class="label">Sample Work</span>
       <h2>Portfolio</h2>
     </div>
-    <div class="courses-grid" id="coursesGrid"></div>
+
+    <!-- Rise 360 Subheading -->
+    <div class="courses-section-title">
+      <span class="courses-sub-badge badge-rise">Rise 360</span>
+      <span class="courses-sub-label">Web Exports</span>
+      <span class="courses-sub-line"></span>
+      <span class="courses-sub-count" id="rise360Count">0 modules</span>
+    </div>
+    <div class="courses-grid" id="rise360Grid"></div>
+
+    <!-- Storyline 360 Subheading -->
+    <div class="courses-section-title">
+      <span class="courses-sub-badge badge-storyline">Storyline 360</span>
+      <span class="courses-sub-label">Interactive Courses</span>
+      <span class="courses-sub-line"></span>
+      <span class="courses-sub-count" id="storylineCount">0 modules</span>
+    </div>
+    <div class="courses-grid" id="storylineGrid"></div>
+
   </div>
 </section>
 
@@ -1214,61 +1445,206 @@
 </footer>
 
 <script>
-  const COURSES = [
+  // ─── CERTIFICATION CAROUSEL ──────────────────────────────────
+  // ADD YOUR CERTIFICATIONS HERE
+  // Each entry: { name, issuer, image }
+  // - name:   Certificate title shown below the image
+  // - issuer: Issuing organization
+  // - image:  Path to the cert image file (e.g. "certs/rise360-cert.png")
+  //           If no image, a styled placeholder will render automatically
+  const CERTIFICATIONS = [
     {
+      name:   "Articulate Rise 360 Certified",
+      issuer: "Articulate",
+      image:  "certs/rise360-cert.png"      // replace with your actual file
+    },
+    {
+      name:   "Articulate Storyline 360 Certified",
+      issuer: "Articulate",
+      image:  "certs/storyline-cert.png"    // replace with your actual file
+    },
+    // ← Paste a new object here for each additional certification
+  ];
+
+  function buildCertCarousel() {
+    const track = document.getElementById('certTrack');
+    const dotsEl = document.getElementById('certDots');
+    const counter = document.getElementById('certCounter');
+    if (!track || !CERTIFICATIONS.length) return;
+
+    let current = 0;
+
+    CERTIFICATIONS.forEach((cert, i) => {
+      // Slide
+      const slide = document.createElement('div');
+      slide.className = 'cert-slide' + (i === 0 ? ' active' : '');
+      slide.dataset.index = i;
+
+      if (cert.image) {
+        const img = document.createElement('img');
+        img.src = cert.image;
+        img.alt = cert.name;
+        img.onerror = () => { img.replaceWith(makePlaceholder(cert)); };
+        slide.appendChild(img);
+      } else {
+        slide.appendChild(makePlaceholder(cert));
+      }
+
+      const nameEl = document.createElement('div');
+      nameEl.className = 'cert-slide-name';
+      nameEl.textContent = cert.name;
+      slide.appendChild(nameEl);
+
+      const issuerEl = document.createElement('div');
+      issuerEl.className = 'cert-slide-issuer';
+      issuerEl.textContent = cert.issuer;
+      slide.appendChild(issuerEl);
+
+      track.appendChild(slide);
+
+      // Dot
+      const dot = document.createElement('span');
+      dot.className = 'cert-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
+
+    counter.textContent = `1 / ${CERTIFICATIONS.length}`;
+
+    function makePlaceholder(cert) {
+      const ph = document.createElement('div');
+      ph.style.cssText = 'width:100%;height:120px;display:flex;align-items:center;justify-content:center;background:rgba(11,122,117,0.07);border:1px dashed var(--deep-ocean);border-radius:4px;font-family:var(--font-mono);font-size:0.7rem;color:var(--deep-ocean);text-align:center;padding:1rem;line-height:1.5;';
+      ph.textContent = '[ cert image goes here ]';
+      return ph;
+    }
+
+    function goTo(idx) {
+      const slides = track.querySelectorAll('.cert-slide');
+      const dots   = dotsEl.querySelectorAll('.cert-dot');
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = idx;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      counter.textContent = `${current + 1} / ${CERTIFICATIONS.length}`;
+    }
+
+    // Auto-advance every 2.5 s
+    setInterval(() => {
+      goTo((current + 1) % CERTIFICATIONS.length);
+    }, 2500);
+  }
+
+  buildCertCarousel();
+
+  // ─── COURSE REGISTRY ─────────────────────────────────────────
+  // Rise 360 courses use index.html as the entry point.
+  // Storyline 360 courses use story.html as the entry point.
+  // Set type: "rise360" or "storyline" accordingly.
+
+  const COURSES = [
+    // ── Rise 360 ──────────────────────────────────────────────
+    {
+      type:        "rise360",
       title:       "Integrated Design Blueprint",
-      tag:         "Rise 360 - Web Export",
+      tag:         "Rise 360",
       description: "A sample e-learning module created with Articulate Rise 360, showcasing instructional design principles and learner-centered content structure.",
       path:        "courses/integrated-design-blueprint/index.html",
       color:       "#0b7a75"
     },
     {
+      type:        "rise360",
       title:       "The Real-World Impact of AI Bias in Education",
-      tag:         "Rise 360 - Web Export",
+      tag:         "Rise 360 · Web Export",
       description: "A sample e-learning module created with Articulate Rise 360, showcasing instructional design principles and learner-centered content structure.",
       path:        "courses/The-Real-World-Impact-of-AI-Bias-in-Education/index.html",
       color:       "#bf4e30"
     },
     {
+      type:        "rise360",
       title:       "Classroom Management: Signals, Prompts, and Praise",
-      tag:         "Rise 360 - Web Export",
+      tag:         "Rise 360 · Web Export",
       description: "A sample e-learning module created with Articulate Rise 360, showcasing instructional design principles and learner-centered content structure.",
       path:        "courses/signals-prompts-and-praise/index.html",
       color:       "#f7b267"
-    }
+    },
+    // ← Paste new Rise 360 objects here
+
+    // ── Storyline 360 ─────────────────────────────────────────
+    // Entry point for Storyline exports is story.html (not index.html)
+    {
+      type:        "storyline",
+      title:       "Storyline Sample 1",
+      tag:         "Storyline 360 · Web Export",
+      description: "An interactive e-learning module built with Articulate Storyline 360.",
+      path:        "courses/storyline-sample-1/story.html",
+      color:       "linear-gradient(135deg, #c1edcc 0%, #6db880 100%)"
+    },
+    {
+      type:        "storyline",
+      title:       "Storyline Sample 2",
+      tag:         "Storyline 360 · Web Export",
+      description: "An interactive e-learning module built with Articulate Storyline 360.",
+      path:        "courses/storyline-sample-2/story.html",
+      color:       "linear-gradient(135deg, #bf4e30 0%, #7a2c18 100%)"
+    },
+    {
+      type:        "storyline",
+      title:       "Storyline Sample 3",
+      tag:         "Storyline 360 · Web Export",
+      description: "An interactive e-learning module built with Articulate Storyline 360.",
+      path:        "courses/storyline-sample-3/story.html",
+      color:       "linear-gradient(135deg, #f7b267 0%, #c4803a 100%)"
+    },
+    // ← Paste new Storyline objects here
   ];
 
-  function buildCourses() {
-    const grid = document.getElementById('coursesGrid');
-    COURSES.forEach((c) => {
-      const card = document.createElement('div');
-      card.className = 'course-card';
-      card.setAttribute('role', 'button');
-      card.setAttribute('tabindex', '0');
-      card.innerHTML = `
-        <div class="course-thumb" style="background:${c.color}">
-          <span class="thumb-label">${c.title}</span>
-          <div class="play-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <polygon points="7,4 21,12 7,20" fill="currentColor"/>
-            </svg>
-          </div>
+  function buildCourseCard(c) {
+    const card = document.createElement('div');
+    card.className = 'course-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+
+    // Normalize color: plain hex → wrap in solid gradient, strings already containing 'gradient' pass through
+    const bg = c.color.includes('gradient') ? c.color : c.color;
+
+    card.innerHTML = `
+      <div class="course-thumb" style="background:${bg}">
+        <span class="thumb-label">${c.title}</span>
+        <div class="play-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <polygon points="7,4 21,12 7,20" fill="currentColor"/>
+          </svg>
         </div>
-        <div class="course-body">
-          <div class="course-tag">${c.tag}</div>
-          <div class="course-title">${c.title}</div>
-          <div class="course-desc">${c.description}</div>
-          <div class="course-cta">
-            OPEN COURSE
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
-            </svg>
-          </div>
-        </div>`;
-      card.addEventListener('click', () => openCourse(c));
-      card.addEventListener('keydown', e => e.key === 'Enter' && openCourse(c));
-      grid.appendChild(card);
-    });
+      </div>
+      <div class="course-body">
+        <div class="course-tag">${c.tag}</div>
+        <div class="course-title">${c.title}</div>
+        <div class="course-desc">${c.description}</div>
+        <div class="course-cta">
+          OPEN COURSE
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+          </svg>
+        </div>
+      </div>`;
+    card.addEventListener('click', () => openCourse(c));
+    card.addEventListener('keydown', e => e.key === 'Enter' && openCourse(c));
+    return card;
+  }
+
+  function buildCourses() {
+    const rise360 = COURSES.filter(c => c.type === 'rise360');
+    const storyline = COURSES.filter(c => c.type === 'storyline');
+
+    const rGrid = document.getElementById('rise360Grid');
+    const sGrid = document.getElementById('storylineGrid');
+
+    document.getElementById('rise360Count').textContent = `${rise360.length} module${rise360.length !== 1 ? 's' : ''}`;
+    document.getElementById('storylineCount').textContent = `${storyline.length} module${storyline.length !== 1 ? 's' : ''}`;
+
+    rise360.forEach(c => rGrid.appendChild(buildCourseCard(c)));
+    storyline.forEach(c => sGrid.appendChild(buildCourseCard(c)));
   }
 
   function openCourse(course) {
@@ -1296,8 +1672,6 @@
     if (e.key === 'Escape') closeModal();
   });
 
-  buildCourses();
-
   // Accordion Logic
   function toggleAccordion(btn) {
     const item = btn.closest('.accordion-item');
@@ -1314,6 +1688,9 @@
     });
   }, { threshold: 0.1 });
 
+  buildCourses();
+
+  // Re-observe all cards now that they've been injected into the DOM
   document.querySelectorAll('.accordion-item, .stat-card, .edu-card, .skill-row, .course-card, .card, .thesis-title-block, .thesis-meta-pills, .thesis-chart-card')
     .forEach(el => observer.observe(el));
 
